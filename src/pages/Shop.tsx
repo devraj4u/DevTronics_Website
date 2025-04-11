@@ -6,7 +6,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "react-router-dom";
-import { Search, ShoppingCart, Star } from "lucide-react";
+import { Search, ShoppingCart, Star, Cpu, Microchip, Battery } from "lucide-react";
 
 // Mock data for products
 const productsList = [
@@ -65,6 +65,35 @@ const productsList = [
     rating: 4.9,
     category: "Libraries"
   },
+  // New Electronics products
+  {
+    id: 7,
+    name: "Arduino Uno R3 Board",
+    description: "Versatile microcontroller board for electronics projects and prototyping.",
+    price: 24.99,
+    image: "/placeholder.svg",
+    rating: 4.9,
+    category: "Electronics",
+    isNew: true
+  },
+  {
+    id: 8,
+    name: "Raspberry Pi 4 Model B",
+    description: "Single-board computer for IoT projects, media centers, and electronics education.",
+    price: 59.99,
+    image: "/placeholder.svg",
+    rating: 4.8,
+    category: "Electronics"
+  },
+  {
+    id: 9,
+    name: "Electronics Component Starter Kit",
+    description: "Complete kit with resistors, capacitors, LEDs, and other components for beginners.",
+    price: 29.99,
+    image: "/placeholder.svg",
+    rating: 4.7,
+    category: "Electronics"
+  },
 ];
 
 const categories = [
@@ -72,7 +101,8 @@ const categories = [
   "Plugins",
   "Libraries",
   "E-books",
-  "Templates"
+  "Templates",
+  "Electronics"
 ];
 
 const priceRanges = [
@@ -129,7 +159,14 @@ const Shop = () => {
                       value={category}
                       className="justify-start mb-2 data-[state=active]:bg-blue-50 data-[state=active]:text-electric-blue"
                     >
-                      {category}
+                      {category === "Electronics" ? (
+                        <span className="flex items-center">
+                          <Microchip className="h-4 w-4 mr-2" />
+                          {category}
+                        </span>
+                      ) : (
+                        category
+                      )}
                     </TabsTrigger>
                   ))}
                 </TabsList>
