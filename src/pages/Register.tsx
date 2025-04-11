@@ -74,7 +74,7 @@ const Register = () => {
         <div className="w-full max-w-md space-y-6">
           <div className="flex flex-col items-center text-center space-y-2">
             <CircuitBoard className="h-12 w-12 text-electric-blue" />
-            <h1 className="text-2xl font-bold">Create your CircuitScribe account</h1>
+            <h1 className="text-2xl font-bold">Create your DevTronics account</h1>
             <p className="text-muted-foreground">
               Join our community of electronics enthusiasts
             </p>

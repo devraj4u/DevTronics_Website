@@ -12,7 +12,7 @@ const Footer = () => {
           <div>
             <Link to="/" className="flex items-center space-x-2 mb-4">
               <CircuitBoard className="h-8 w-8 text-electric-blue" />
-              <span className="font-bold text-xl">Circuit<span className="text-electric-blue">Scribe</span></span>
+              <span className="font-bold text-xl">Dev<span className="text-electric-blue">Tronics</span></span>
             </Link>
             <p className="text-gray-300 mb-4">
               Sharing electronics knowledge, projects, and tools for engineers and enthusiasts.
@@ -102,7 +102,7 @@ const Footer = () => {
 
         <div className="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">
-            © {currentYear} CircuitScribe. All rights reserved.
+            © {currentYear} DevTronics. All rights reserved.
           </p>
           <div className="flex space-x-4 mt-4 md:mt-0">
             <Link to="/privacy-policy" className="text-gray-400 text-sm hover:text-gray-300">

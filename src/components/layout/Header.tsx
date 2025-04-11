@@ -24,7 +24,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-2">
             <CircuitBoard className="h-8 w-8 text-electric-blue" />
-            <span className="font-bold text-xl text-deep-blue">Circuit<span className="text-electric-blue">Scribe</span></span>
+            <span className="font-bold text-xl text-deep-blue">Dev<span className="text-electric-blue">Tronics</span></span>
           </Link>
 
           {/* Desktop Navigation */}

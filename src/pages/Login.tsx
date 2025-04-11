@@ -65,7 +65,7 @@ const Login = () => {
         <div className="w-full max-w-md space-y-6">
           <div className="flex flex-col items-center text-center space-y-2">
             <CircuitBoard className="h-12 w-12 text-electric-blue" />
-            <h1 className="text-2xl font-bold">Welcome to CircuitScribe</h1>
+            <h1 className="text-2xl font-bold">Welcome to DevTronics</h1>
             <p className="text-muted-foreground">
               Enter your credentials to access your account
             </p>
