@@ -7,6 +7,8 @@ import {
   Menu,
   ShoppingCart,
   X,
+  LogIn,
+  UserPlus,
 } from "lucide-react";
 
 const Header = () => {
@@ -50,9 +52,18 @@ const Header = () => {
                 <ShoppingCart className="h-5 w-5" />
               </Button>
             </Link>
-            <Button variant="default" className="bg-electric-blue hover:bg-deep-blue">
-              Contact
-            </Button>
+            <Link to="/login">
+              <Button variant="outline" size="sm" className="flex items-center gap-1">
+                <LogIn className="h-4 w-4" />
+                Login
+              </Button>
+            </Link>
+            <Link to="/register">
+              <Button variant="default" size="sm" className="bg-electric-blue hover:bg-deep-blue flex items-center gap-1">
+                <UserPlus className="h-4 w-4" />
+                Register
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -105,6 +116,20 @@ const Header = () => {
               onClick={toggleMenu}
             >
               Cart
+            </Link>
+            <Link 
+              to="/login" 
+              className="block py-2 px-4 text-gray-700 hover:bg-gray-50 rounded-md"
+              onClick={toggleMenu}
+            >
+              Login
+            </Link>
+            <Link 
+              to="/register" 
+              className="block py-2 px-4 text-gray-700 hover:bg-gray-50 rounded-md"
+              onClick={toggleMenu}
+            >
+              Register
             </Link>
             <div className="pt-2 px-4">
               <Button className="w-full bg-electric-blue hover:bg-deep-blue">
