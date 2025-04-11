@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/form";
 import { toast } from "sonner";
 import { CircuitBoard } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const emailSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
@@ -39,18 +40,18 @@ const ForgotPassword = () => {
     setIsLoading(true);
     
     try {
-      // Mock password reset - this should be replaced with your actual reset logic
-      console.log("Password reset request for:", data.email);
+      const { error } = await supabase.auth.resetPasswordForEmail(data.email, {
+        redirectTo: window.location.origin + '/login',
+      });
       
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      if (error) throw error;
       
       setIsSubmitted(true);
       toast.success("Password reset instructions sent to your email.");
       
-    } catch (error) {
+    } catch (error: any) {
       console.error("Password reset error:", error);
-      toast.error("Failed to send reset instructions. Please try again.");
+      toast.error(error.message || "Failed to send reset instructions. Please try again.");
     } finally {
       setIsLoading(false);
     }

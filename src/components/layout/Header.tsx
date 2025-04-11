@@ -9,10 +9,14 @@ import {
   X,
   LogIn,
   UserPlus,
+  LogOut,
+  User,
 } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, signOut } = useAuth();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -52,18 +56,41 @@ const Header = () => {
                 <ShoppingCart className="h-5 w-5" />
               </Button>
             </Link>
-            <Link to="/login">
-              <Button variant="outline" size="sm" className="flex items-center gap-1">
-                <LogIn className="h-4 w-4" />
-                Login
-              </Button>
-            </Link>
-            <Link to="/register">
-              <Button variant="default" size="sm" className="bg-electric-blue hover:bg-deep-blue flex items-center gap-1">
-                <UserPlus className="h-4 w-4" />
-                Register
-              </Button>
-            </Link>
+            
+            {user ? (
+              <div className="flex items-center space-x-4">
+                <Link to="/account">
+                  <Button variant="outline" size="sm" className="flex items-center gap-1">
+                    <User className="h-4 w-4" />
+                    Account
+                  </Button>
+                </Link>
+                <Button 
+                  variant="default" 
+                  size="sm" 
+                  className="bg-electric-blue hover:bg-deep-blue flex items-center gap-1"
+                  onClick={() => signOut()}
+                >
+                  <LogOut className="h-4 w-4" />
+                  Sign Out
+                </Button>
+              </div>
+            ) : (
+              <div className="flex items-center space-x-4">
+                <Link to="/login">
+                  <Button variant="outline" size="sm" className="flex items-center gap-1">
+                    <LogIn className="h-4 w-4" />
+                    Login
+                  </Button>
+                </Link>
+                <Link to="/register">
+                  <Button variant="default" size="sm" className="bg-electric-blue hover:bg-deep-blue flex items-center gap-1">
+                    <UserPlus className="h-4 w-4" />
+                    Register
+                  </Button>
+                </Link>
+              </div>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -117,25 +144,44 @@ const Header = () => {
             >
               Cart
             </Link>
-            <Link 
-              to="/login" 
-              className="block py-2 px-4 text-gray-700 hover:bg-gray-50 rounded-md"
-              onClick={toggleMenu}
-            >
-              Login
-            </Link>
-            <Link 
-              to="/register" 
-              className="block py-2 px-4 text-gray-700 hover:bg-gray-50 rounded-md"
-              onClick={toggleMenu}
-            >
-              Register
-            </Link>
-            <div className="pt-2 px-4">
-              <Button className="w-full bg-electric-blue hover:bg-deep-blue">
-                Contact
-              </Button>
-            </div>
+            
+            {user ? (
+              <>
+                <Link 
+                  to="/account" 
+                  className="block py-2 px-4 text-gray-700 hover:bg-gray-50 rounded-md"
+                  onClick={toggleMenu}
+                >
+                  Account
+                </Link>
+                <Button 
+                  className="w-full mt-2 bg-electric-blue hover:bg-deep-blue"
+                  onClick={() => {
+                    signOut();
+                    toggleMenu();
+                  }}
+                >
+                  Sign Out
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link 
+                  to="/login" 
+                  className="block py-2 px-4 text-gray-700 hover:bg-gray-50 rounded-md"
+                  onClick={toggleMenu}
+                >
+                  Login
+                </Link>
+                <Link 
+                  to="/register" 
+                  className="block py-2 px-4 text-gray-700 hover:bg-gray-50 rounded-md"
+                  onClick={toggleMenu}
+                >
+                  Register
+                </Link>
+              </>
+            )}
           </nav>
         )}
       </div>

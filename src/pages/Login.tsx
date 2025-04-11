@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,8 +15,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { toast } from "sonner";
 import { CircuitBoard } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
@@ -26,8 +26,7 @@ const loginSchema = z.object({
 type LoginFormValues = z.infer<typeof loginSchema>;
 
 const Login = () => {
-  const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
+  const { signIn, loading } = useAuth();
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -38,25 +37,7 @@ const Login = () => {
   });
 
   const onSubmit = async (data: LoginFormValues) => {
-    setIsLoading(true);
-    
-    try {
-      // Mock login - this should be replaced with your actual authentication logic
-      console.log("Login attempt:", data);
-      
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Success message and redirect
-      toast.success("Login successful! Welcome back.");
-      navigate("/");
-      
-    } catch (error) {
-      console.error("Login error:", error);
-      toast.error("Login failed. Please check your credentials and try again.");
-    } finally {
-      setIsLoading(false);
-    }
+    await signIn(data.email, data.password);
   };
 
   return (
@@ -122,9 +103,9 @@ const Login = () => {
                 <Button 
                   type="submit" 
                   className="w-full bg-electric-blue hover:bg-deep-blue" 
-                  disabled={isLoading}
+                  disabled={loading}
                 >
-                  {isLoading ? "Signing in..." : "Sign in"}
+                  {loading ? "Signing in..." : "Sign in"}
                 </Button>
               </form>
             </Form>

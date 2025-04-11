@@ -1,6 +1,5 @@
 
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,8 +14,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { toast } from "sonner";
 import { CircuitBoard } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const registerSchema = z
   .object({
@@ -33,8 +32,7 @@ const registerSchema = z
 type RegisterFormValues = z.infer<typeof registerSchema>;
 
 const Register = () => {
-  const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
+  const { signUp, loading } = useAuth();
 
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
@@ -47,25 +45,7 @@ const Register = () => {
   });
 
   const onSubmit = async (data: RegisterFormValues) => {
-    setIsLoading(true);
-    
-    try {
-      // Mock registration - this should be replaced with your actual registration logic
-      console.log("Registration data:", data);
-      
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Success message and redirect
-      toast.success("Account created successfully! Please log in.");
-      navigate("/login");
-      
-    } catch (error) {
-      console.error("Registration error:", error);
-      toast.error("Registration failed. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
+    await signUp(data.email, data.password, data.name);
   };
 
   return (
@@ -154,9 +134,9 @@ const Register = () => {
                 <Button 
                   type="submit" 
                   className="w-full bg-electric-blue hover:bg-deep-blue" 
-                  disabled={isLoading}
+                  disabled={loading}
                 >
-                  {isLoading ? "Creating account..." : "Create account"}
+                  {loading ? "Creating account..." : "Create account"}
                 </Button>
               </form>
             </Form>
