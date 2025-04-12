@@ -40,8 +40,9 @@ jobs:
         run: npm run build
         env:
           CI: false # This prevents the build from failing on warnings
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v1
+          BASE_URL: '/DevTronics_Website/'
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: "./dist"
 
@@ -55,4 +56,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v3
