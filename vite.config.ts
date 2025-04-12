@@ -24,5 +24,7 @@ export default defineConfig(({ mode }) => ({
   build: {
     outDir: 'dist', // Output directory for the build
     sourcemap: false, // Set to true if you want source maps in production
+    minify: 'terser', // Use terser for better minification
+    target: 'es2018', // Ensure wider browser compatibility
   },
 }));
