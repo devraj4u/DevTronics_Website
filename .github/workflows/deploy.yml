@@ -40,7 +40,7 @@ jobs:
         run: npm run build
         env:
           CI: false # This prevents the build from failing on warnings
-          BASE_URL: '/DevTronics_Website/'
+          BASE_URL: '/'
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
